@@ -1,25 +1,25 @@
-import fs from 'fs'
+const fs = require('fs')
 
-import _debug from 'debug'
-import Koa from 'koa'
-import cash from 'koa-cash'
-import compose from 'koa-compose'
-import compress from 'koa-compress'
-import logger from 'koa-logger'
-import mount from 'koa-mount'
-import serve from 'koa-static-cache'
-import LRU from 'lru-cache'
-import { createBundleRenderer } from 'react-server-renderer'
+const _debug = require('debug')
+const Koa = require('koa')
+const cash = require('koa-cash')
+const compose = require('koa-compose')
+const compress = require('koa-compress')
+const logger = require('koa-logger')
+const mount = require('koa-mount')
+const serve = require('koa-static-cache')
+const LRU = require('lru-cache')
+const { createBundleRenderer } = require('react-server-renderer')
 
-import {
+const {
   __DEV__,
   resolve,
   runtimeRequire,
   serverHost,
   serverPort,
-} from '../build/config'
+} = require('../build/config')
 
-const debug = _debug('1stg:server')
+const debug = _debug('ycombinator:server')
 
 const template = __DEV__
   ? require('pug').renderFile(resolve('server/template.pug'), {
@@ -40,7 +40,7 @@ const middlewares = [
   mount(
     '/public',
     serve(resolve('public'), {
-      maxAge: MAX_AGE,
+      maxAge: MAX_AGE
     }),
   ),
   async (ctx, next) => {

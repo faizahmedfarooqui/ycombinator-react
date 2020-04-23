@@ -58,7 +58,7 @@ export const routes = [
   },
   {
     path: '*',
-    component: class NotFound extends React.PureComponent {
+    component: class NotFound extends React.Component {
       static propTypes = {
         staticContext: PropTypes.object,
       }
@@ -87,7 +87,7 @@ const transitionStyles = {
 }
 
 @withRouter
-export default class App extends React.PureComponent {
+export default class App extends React.Component {
   static propTypes = {
     location: PropTypes.object.isRequired,
   }

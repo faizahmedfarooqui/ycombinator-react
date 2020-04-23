@@ -10,7 +10,7 @@ export const withSsr = (styles, router = true, title) => {
   }
 
   return Component => {
-    class SsrConmponent extends React.PureComponent {
+    class SsrConmponent extends React.Component {
       static displayName = `Ssr${Component.displayName ||
         Component.name ||
         'Component'}`
@@ -36,13 +36,13 @@ export const withSsr = (styles, router = true, title) => {
         }
 
         if (__SERVER__) {
-          this.props.staticContext.title = `React Hackernews | ${t}`
+          this.props.staticContext.title = `YCombinator Hackernews | ${t}`
           return
         }
 
         Promise.resolve(t).then(title => {
           if (title) {
-            document.title = `React Hackernews | ${title}`
+            document.title = `YCombinator Hackernews | ${title}`
           }
         })
       }

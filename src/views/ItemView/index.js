@@ -25,7 +25,7 @@ import { withSsr, host, timeAgo } from 'utils'
   } = props
   return items[id] && items[id].title
 })
-export default class ItemView extends React.PureComponent {
+export default class ItemView extends React.Component {
   static propTypes = {
     items: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
@@ -97,13 +97,13 @@ export default class ItemView extends React.PureComponent {
             {item.kids ? item.descendants + ' comments' : 'No comments yet.'}
             <Spinner show={loading} />
           </p>
-          {loading || !item.kids ? null : (
+          {(!loading && item.kids) ? (
             <ul className="comment-children">
               {item.kids.map(id => (
                 <Comment key={id} id={id} />
               ))}
             </ul>
-          )}
+          ) : null}
         </div>
       </div>
     ) : null

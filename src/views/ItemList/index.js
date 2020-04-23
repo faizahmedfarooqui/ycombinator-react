@@ -43,7 +43,7 @@ import Spinner from 'components/Spinner'
   }),
 )
 @withSsr(styles, false, ({ props }) => startCase(props.type))
-export default class ItemList extends React.PureComponent {
+export default class ItemList extends React.Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     activeItems: PropTypes.array.isRequired,

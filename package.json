@@ -6,21 +6,22 @@
   "author": "faizahmedfarooqui <faizz.af@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env DEBUG=ycombinator:* babel-node server",
+    "dev": "./node_modules/.bin/cross-env DEBUG=ycombinator:* babel-node server",
     "build:react:client": "webpack --config=build/react.client.babel.js --colors --progress",
     "build:react:server": "webpack --config=build/react.server.babel.js --colors --progress",
     "build:server": "webpack --config build/server.babel.js --colors --progress",
     "build:template": "mkdir -p dist/static && node build/template.js",
-    "build": "rimraf dist && cross-env DEBUG=ycombinator:* NODE_ENV=production run-p build:react:client build:react:server build:server build:template",
-    "start": "cross-env DEBUG=ycombinator:* NODE_ENV=production node dist/server",
+    "build": "rimraf dist && ./node_modules/.bin/cross-env DEBUG=ycombinator:* NODE_ENV=production run-p build:react:client build:react:server build:server build:template",
+    "start": "./node_modules/.bin/cross-env DEBUG=ycombinator:* NODE_ENV=production node dist/server",
     "sync:now": "bash build/sync-now.sh",
     "sync:pull": "bash build/sync-pull.sh",
     "sync:push": "bash build/sync-push.sh",
     "lint": "eslint . --ignore-path .gitignore --max-warnings=10",
-    "pm2": "yarn sync:pull && cross-env PORT=8000 pm2 start --name=react-hn npm -- start",
+    "pm2": "yarn sync:pull && ./node_modules/.bin/cross-env PORT=8000 pm2 start --name=react-hn npm -- start",
     "prune": "yarn install --production --ignore-optional --ignore-scripts --prefer-offline --force"
   },
   "dependencies": {
+    "@1stg/prettier-config": "^0.10.0",
     "connected-react-router": "^6.5.2",
     "cross-env": "^5.2.1",
     "debug": "^4.1.1",
@@ -50,6 +51,7 @@
     "serialize-javascript": "^1.7.0"
   },
   "devDependencies": {
+    "@1stg/eslint-config": "^0.20.0",
     "@babel/core": "^7.6.2",
     "@babel/node": "^7.6.2",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
@@ -67,7 +69,6 @@
     "css-loader": "^3.2.0",
     "cssnano": "^4.1.10",
     "eslint": "^6.5.1",
-    "eslint-config-ycombinator": "^4.2.3",
     "eslint-import-resolver-babel-module": "^5.1.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-minifier": "^4.0.0",
@@ -84,7 +85,7 @@
     "react-style-loader": "^2.3.0",
     "rimraf": "^2.7.1",
     "sass": "^1.22.12",
-    "sass-loader": "webpack-contrib/sass-loader",
+    "sass-loader": "^8.0.2",
     "sw-precache-webpack-plugin": "^0.11.5",
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9",
@@ -98,7 +99,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "ycombinator/react"
+      "@1stg/eslint-config"
     ],
     "env": {
       "browser": true,
@@ -120,25 +121,8 @@
       }
     }
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{json,md}": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.js": [
-      "eslint --max-warnings=10 --fix",
-      "git add"
-    ]
-  },
-  "prettier": "prettier-config-ycombinator",
+  "prettier": "@1stg/prettier-config",
   "renovate": {
-    "extends": [
-      "ycombinator"
-    ]
+    "extends": []
   }
 }

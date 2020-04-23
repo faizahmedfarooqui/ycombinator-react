@@ -1,15 +1,15 @@
-import _debug from 'debug'
-import koaWebpack from 'koa-webpack'
-import MFS from 'memory-fs'
-import webpack from 'webpack'
+const _debug = require('debug')
+const koaWebpack = require('koa-webpack')
+const MFS = require('memory-fs')
+const webpack = require('webpack')
 
-import { resolve } from '../build/config'
-import clientConfig from '../build/react.client.babel'
-import serverConfig from '../build/react.server.babel'
+const { resolve } = require('../build/config')
+const clientConfig = require('../build/react.client.babel')
+const serverConfig = require('../build/react.server.babel')
 
-const debug = _debug('1stg:server:dev')
+const debug = _debug('ycombinator:server:dev')
 
-export default after => {
+exports.default = (after) => {
   let _resolve, clientManifest, bundle, fs
 
   const readyPromise = new Promise(resolve => {
@@ -43,7 +43,7 @@ export default after => {
       fs = webpackMiddleware.devMiddleware.fileSystem
 
       clientManifest = JSON.parse(
-        fs.readFileSync(resolve('dist/react-ssr-client-manifest.json')),
+        fs.readFileSync(resolve('dist/react-ssr-client-manifest.json'))
       )
 
       if (bundle) {

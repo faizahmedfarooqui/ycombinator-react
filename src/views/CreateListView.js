@@ -17,7 +17,7 @@ export default type => {
         dispatch(fetchListData(type, props.match.params.page)),
     }),
   )
-  class ListView extends React.PureComponent {
+  class ListView extends React.Component {
     static propTypes = {
       activeItems: PropTypes.array.isRequired,
       fetchListData: PropTypes.func.isRequired,

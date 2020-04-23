@@ -38,7 +38,7 @@ const USER_NOT_FOUND = 'User Not Found'
       .then(() => (self.props.users[id] ? id : USER_NOT_FOUND))
   }
 })
-export default class UserView extends React.PureComponent {
+export default class UserView extends React.Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
     users: PropTypes.object.isRequired,
