@@ -1,0 +1,144 @@
+{
+  "name": "ycombinator-react",
+  "version": "0.0.12",
+  "description": "HackerNews clone built with React, ReactRouter & Redux, with server-side rendering",
+  "repository": "git@github.com:faizahmedfarooqui/ycombinator-react.git",
+  "author": "faizahmedfarooqui <faizz.af@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "cross-env DEBUG=ycombinator:* babel-node server",
+    "build:react:client": "webpack --config=build/react.client.babel.js --colors --progress",
+    "build:react:server": "webpack --config=build/react.server.babel.js --colors --progress",
+    "build:server": "webpack --config build/server.babel.js --colors --progress",
+    "build:template": "mkdir -p dist/static && node build/template.js",
+    "build": "rimraf dist && cross-env DEBUG=ycombinator:* NODE_ENV=production run-p build:react:client build:react:server build:server build:template",
+    "start": "cross-env DEBUG=ycombinator:* NODE_ENV=production node dist/server",
+    "sync:now": "bash build/sync-now.sh",
+    "sync:pull": "bash build/sync-pull.sh",
+    "sync:push": "bash build/sync-push.sh",
+    "lint": "eslint . --ignore-path .gitignore --max-warnings=10",
+    "pm2": "yarn sync:pull && cross-env PORT=8000 pm2 start --name=react-hn npm -- start",
+    "prune": "yarn install --production --ignore-optional --ignore-scripts --prefer-offline --force"
+  },
+  "dependencies": {
+    "connected-react-router": "^6.5.2",
+    "cross-env": "^5.2.1",
+    "debug": "^4.1.1",
+    "firebase": "^6.6.2",
+    "history": "^4.10.1",
+    "koa": "^2.8.1",
+    "koa-cash": "^3.1.0-0",
+    "koa-compose": "^4.1.0",
+    "koa-compress": "^3.0.0",
+    "koa-logger": "^3.2.1",
+    "koa-mount": "^4.0.0",
+    "koa-static-cache": "^5.1.2",
+    "lodash-es": "^4.17.15",
+    "lru-cache": "^5.1.1",
+    "path-to-regexp": "^3.1.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-loadable": "^5.5.0",
+    "react-redux": "^7.1.1",
+    "react-router": "^5.0.1",
+    "react-router-config": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "react-server-renderer": "^1.2.0",
+    "react-transition-group": "^4.2.2",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0",
+    "serialize-javascript": "^1.7.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-decorators": "^7.6.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.6.2",
+    "autoprefixer": "^9.6.4",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-dynamic-import-node": "^2.3.0",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "css-loader": "^3.2.0",
+    "cssnano": "^4.1.10",
+    "eslint": "^6.5.1",
+    "eslint-config-ycombinator": "^4.2.3",
+    "eslint-import-resolver-babel-module": "^5.1.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "html-minifier": "^4.0.0",
+    "husky": "^3.0.8",
+    "koa-webpack": "^5.2.4",
+    "lint-staged": "^9.4.1",
+    "mini-css-extract-plugin": "^0.8.0",
+    "npm-run-all": "^4.1.5",
+    "postcss-loader": "^3.0.0",
+    "prettier": "^1.18.2",
+    "prop-types": "^15.7.2",
+    "pug": "^2.0.4",
+    "pug-plain-loader": "^1.0.0",
+    "react-style-loader": "^2.3.0",
+    "rimraf": "^2.7.1",
+    "sass": "^1.22.12",
+    "sass-loader": "webpack-contrib/sass-loader",
+    "sw-precache-webpack-plugin": "^0.11.5",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9",
+    "webpack-merge": "^4.2.2",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/env"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "ycombinator/react"
+    ],
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+    },
+    "globals": {
+      "__DEV__": false,
+      "__SERVER__": false
+    },
+    "parserOptions": {
+      "ecmaFeatures": {
+        "legacyDecorators": true
+      }
+    },
+    "settings": {
+      "import/resolver": {
+        "babel-module": {}
+      }
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{json,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.js": [
+      "eslint --max-warnings=10 --fix",
+      "git add"
+    ]
+  },
+  "prettier": "prettier-config-ycombinator",
+  "renovate": {
+    "extends": [
+      "ycombinator"
+    ]
+  }
+}
