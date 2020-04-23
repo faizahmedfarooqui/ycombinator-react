@@ -110,11 +110,11 @@ export default class App extends React.Component {
             </nav>
             <a
               className="github"
-              href="https://github.com/JounQin/react-hackernews"
+              href="https://github.com/faizahmedfarooqui/ycombinator-react"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Built with React.js
+              Github
               <img src="/public/external.svg" />
             </a>
           </div>
