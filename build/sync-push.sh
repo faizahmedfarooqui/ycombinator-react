@@ -14,14 +14,14 @@ main() {
     local CREATED=1
 
     {
-      git clone https://user:${GH_TOKEN}@github.com/faizahmedfarooqui/ycombinator-react.git sync -b assets
+      git clone https://user:${GH_TOKEN}@github.com/faizahmedfarooqui/ycombinator-react.git sync -b development
     } || {
-      echo "branch \`assets\` has not been created"
+      echo "branch \`development\` has not been created"
       CREATED=0
       mkdir sync
       cd sync
       git init
-      git checkout -b assets
+      git checkout -b development
       git remote add origin https://user:${GH_TOKEN}@github.com/faizahmedfarooqui/ycombinator-react.git
       cd ..
     }
@@ -42,8 +42,8 @@ main() {
       then
         git push --quiet
       else
-        echo "first push, create \`assets\` branch"
-        git push --quiet --set-upstream origin assets
+        echo "first push, create \`development\` branch"
+        git push --quiet --set-upstream origin development
       fi
     else
       echo "there is nothing changed to commit"
