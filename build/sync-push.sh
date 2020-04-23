@@ -14,7 +14,7 @@ main() {
     local CREATED=1
 
     {
-      git clone https://user:${GH_TOKEN}@github.com/faizahmedfarooqui/ycombinator.git sync -b assets
+      git clone https://user:${GH_TOKEN}@github.com/faizahmedfarooqui/ycombinator-react.git sync -b assets
     } || {
       echo "branch \`assets\` has not been created"
       CREATED=0
@@ -22,7 +22,7 @@ main() {
       cd sync
       git init
       git checkout -b assets
-      git remote add origin https://user:${GH_TOKEN}@github.com/faizahmedfarooqui/ycombinator.git
+      git remote add origin https://user:${GH_TOKEN}@github.com/faizahmedfarooqui/ycombinator-react.git
       cd ..
     }
 
