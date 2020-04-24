@@ -6,7 +6,8 @@
   line-height: 20px;
 
   .score {
-    color: #00d8ff;
+    // #1ebea5
+    color: #1ebea5;
     font-size: 1.1em;
     font-weight: 700;
     position: absolute;
@@ -26,7 +27,7 @@
       color: #828282;
       text-decoration: underline;
       &:hover {
-        color: #00d8ff;
+        color: #1ebea5;
       }
     }
   }

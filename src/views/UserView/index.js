@@ -61,7 +61,7 @@ export default class UserView extends React.Component {
       <div className="user-view">
         {user ? (
           <>
-            <h1>User : {user.id}</h1>
+            <h1>User: {user.id}</h1>
             <ul className="meta">
               <li>
                 <span className="label">Created:</span> {timeAgo(user.created)}{' '}

@@ -98,7 +98,7 @@ export default class App extends React.Component {
         <header className="header">
           <div className="header-content">
             <NavLink to="/" exact>
-              <img className="logo" src="/public/logo.svg" alt="React Logo" />
+              {"News YCombinator"}
             </NavLink>
             <nav className="inner">
               {['top', 'new', 'show', 'ask', 'job'].map(route => (
