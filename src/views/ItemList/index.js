@@ -16,9 +16,12 @@ import {
   ensureActiveItems,
   fetchListData,
 } from 'store'
+
 import { withSsr } from 'utils'
 import Item from 'components/Item'
 import Spinner from 'components/Spinner'
+
+import Chart from "react-google-charts";
 
 @connect(
   (state, props) => ({
@@ -156,15 +159,36 @@ export default class ItemList extends React.Component {
 
   render() {
     
-    const { page, maxPage, hasMore } = this
+    const { page, maxPage, hasMore } = this;
     const {
       displayedItems,
       displayedPage,
       itemTransition,
       transition,
-    } = this.state
+    } = this.state;
 
-    const { loading, type } = this.props
+    const { loading, type } = this.props;
+
+    const data = [
+      ["Votes", "ID"],
+    ];
+
+    displayedItems.forEach(item => {      
+      data.push([
+        item.id + '', 
+        (typeof item.score === "string") ? 0 : item.score
+      ]);
+    });
+
+    const options = {
+      vAxis: {
+        title: "Votes"
+      },
+      hAxis: {
+        title: "ID"
+      },
+      series: {5: {type: "line"}}
+    };
 
     return (
       <div className="news-view">
@@ -205,14 +229,21 @@ export default class ItemList extends React.Component {
                     <Item item={item} />
                   </CSSTransition>
                 ))}
+                <Chart
+                  chartType="LineChart"
+                  width="100%"
+                  height="400px"
+                  data={data}
+                  options={options}
+                />
               </TransitionGroup>
             ) : (
               <div className="loading">
                 <Spinner show={true} />
               </div>
-            )}
+            )}            
           </div>
-        </CSSTransition>
+        </CSSTransition>        
       </div>
     )
   }
