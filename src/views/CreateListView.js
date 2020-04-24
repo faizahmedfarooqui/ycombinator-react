@@ -23,6 +23,14 @@ export default type => {
       fetchListData: PropTypes.func.isRequired,
     }
 
+    constructor(props) {
+      super(props);
+    }
+
+    componentDidMount() {
+      this.props.fetchListData(this.props.match.url.replace(/\//g,''), undefined);
+    }
+
     static preload({ store, match }) {
       return store.dispatch(fetchListData(type, match.params.page))
     }

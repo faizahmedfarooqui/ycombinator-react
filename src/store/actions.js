@@ -64,8 +64,9 @@ export const fetchItems = ids => (dispatch, getState) => {
   }
 }
 
-export const ensureActiveItems = page => (dispatch, getState) =>
-  dispatch(fetchItems(activeIds(getState(), page)))
+export const ensureActiveItems = page => (dispatch, getState) => 
+  dispatch(fetchItems(activeIds(getState(), page)));
+  
 
 export const fetchUser = id => (dispatch, getState) =>
   getState().users[id]

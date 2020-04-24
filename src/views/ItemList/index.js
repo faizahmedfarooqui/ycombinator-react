@@ -155,6 +155,7 @@ export default class ItemList extends React.Component {
   }
 
   render() {
+    
     const { page, maxPage, hasMore } = this
     const {
       displayedItems,

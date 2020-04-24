@@ -19,7 +19,6 @@ const createListView = id =>
   resolver(() => import('views/CreateListView').then(m => m.default(id)))
 
 const RedirectToTop = () => <Redirect to="/top" />
-
 RedirectToTop.preload = ({ context }) => (context.url = '/top')
 
 export const routes = [
