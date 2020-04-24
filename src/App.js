@@ -83,7 +83,7 @@ const transitionStyles = {
   entered: {
     opacity: 1,
   },
-}
+};
 
 @withRouter
 export default class App extends React.Component {
@@ -98,7 +98,7 @@ export default class App extends React.Component {
         <header className="header">
           <div className="header-content">
             <NavLink to="/" exact>
-              {"News YCombinator"}
+              {"HackerNews"}
             </NavLink>
             <nav className="inner">
               {['top', 'new', 'show', 'ask', 'job'].map(route => (

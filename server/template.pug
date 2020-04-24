@@ -9,6 +9,35 @@ html(lang="en")
     link(rel="apple-touch-icon" sizes="120x120" href="/public/logo.svg")
     link(rel="shortcut icon" sizes="48x48" href="/public/favicon.ico")
     link(rel="manifest" href="/public/manifest.json")
+    script(type='application/ld+json').
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "NewsArticle",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://faizahmed-ycombinator.herokuapp.com"
+          },
+          "headline": "HackerNews clone built with React, ReactRouter & Redux, Firebase with server-side rendering.",
+          "image": "",  
+          "author": {
+            "@type": "Person",
+            "name": "Faiz Ahmed Farooqui"
+          },  
+          "publisher": {
+            "@type": "Organization",
+            "name": "GeekyAnts",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://geekyants.com/images/logo-icon-lg.png",
+              "width": ,
+              "height": 
+            }
+          },
+          "datePublished": "2020-04-23",
+          "dateModified": "2020-04-24"
+        }
+      ]
     style.
       #skip a {
          position: absolute;
