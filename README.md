@@ -1,4 +1,4 @@
-# HackerNew Clone
+# HackerNews Clone
 
 ## Local SetUp:
 
