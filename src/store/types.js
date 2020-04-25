@@ -4,4 +4,4 @@ export default {
   SET_LIST: 'SET_LIST',
   SET_ITEMS: 'SET_ITEMS',
   SET_USER: 'SET_USER',
-}
+};

@@ -1,7 +1,7 @@
-import nodeExternals from 'webpack-node-externals'
+import nodeExternals from 'webpack-node-externals';
 
-import { NODE_ENV, resolve } from './config'
-import { babelLoader } from './base'
+import { babelLoader } from './base';
+import { NODE_ENV, resolve } from './config';
 
 export default {
   mode: NODE_ENV,
@@ -15,4 +15,4 @@ export default {
   module: {
     rules: [babelLoader(true)],
   },
-}
+};

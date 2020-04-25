@@ -1,16 +1,18 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { 
+  withSsr, host, timeAgo, hideItem, itemExist, upVote, isVoted
+} from 'utils';
 
-import styles from './styles'
+import styles from './styles';
 
-import { withSsr, host, timeAgo } from 'utils'
-
-const Item = ({ item }) => (
+const show = (item, _voted) => (
   <li className="news-item">
-    <span className="score">{item.score}</span>
+    <span className="score">{_voted ? parseInt(item.score) + 1 : item.score}</span>
     <span className="title">
-      {item.url ? (
+      <Link onClick={() => upVote(item)} className="vote">{_voted ? "\u25B2" : "\u25B3"}</Link> 
+      {' '}{item.url ? (
         <>
           <a href={item.url} target="_blank" rel="noopener noreferrer">
             {item.title}
@@ -29,21 +31,30 @@ const Item = ({ item }) => (
         </span>
       ) : null}
       <span className="time">{timeAgo(item.time)} ago</span>
+      | {' '}
+      <span className="comments-link">
+        <Link onClick={() => hideItem(item)}>Hide</Link>
+      </span>
       {item.type !== 'job' ? (
         <span className="comments-link">
           {' '}
-          | <Link to={'/item/' + item.id}>{item.descendants} comments</Link>
+          | <Link to={'/item/' + item.id}>{item.descendants} Comments</Link>
         </span>
-      ) : null}
+      ) : null}      
     </span>
     {item.type !== 'story' ? (
       <span className="label">{' ' + item.type}</span>
     ) : null}
   </li>
-)
+);
+
+const Item = ({ item }) => {
+  const _voted = isVoted(item);
+  return itemExist(item) ? null : show (item, _voted);
+};
 
 Item.propTypes = {
   item: PropTypes.object.isRequired,
-}
+};
 
-export default withSsr(styles, true)(Item)
+export default withSsr(styles, true)(Item);

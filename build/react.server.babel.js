@@ -1,10 +1,10 @@
-import webpack from 'webpack'
-import merge from 'webpack-merge'
-import nodeExternals from 'webpack-node-externals'
-import { ReactSSRServerPlugin } from 'react-server-renderer/server-plugin'
+import webpack from 'webpack';
+import merge from 'webpack-merge';
+import nodeExternals from 'webpack-node-externals';
+import { ReactSSRServerPlugin } from 'react-server-renderer/server-plugin';
 
-import { resolve } from './config'
-import base, { babelLoader } from './base'
+import { resolve } from './config';
+import base, { babelLoader } from './base';
 
 export default merge.smart(base, {
   entry: resolve('src/entry-server.js'),
@@ -32,4 +32,4 @@ export default merge.smart(base, {
     }),
     new ReactSSRServerPlugin(),
   ],
-})
+});

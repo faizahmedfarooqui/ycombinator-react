@@ -1,24 +1,24 @@
-import TYPES from './types'
+import TYPES from './types';
 
 export const loading = (state = false, action) => {
   switch (action.type) {
     case TYPES.SET_LOADING:
-      return action.loading
+      return action.loading;
     default:
-      return state
+      return state;
   }
 }
 
 export const activeType = (state = null, action) => {
   switch (action.type) {
     case TYPES.SET_ACTIVE_TYPE:
-      return action.activeType
+      return action.activeType;
     default:
-      return state
+      return state;
   }
 }
 
-export const itemsPerPage = (state = 20) => state
+export const itemsPerPage = (state = 20) => state;
 
 export const items = (state = {}, action) => {
   switch (action.type) {
@@ -31,9 +31,9 @@ export const items = (state = {}, action) => {
           }
           return result
         }, {}),
-      }
+      };
     default:
-      return state
+      return state;
   }
 }
 
@@ -43,9 +43,9 @@ export const users = (state = {}, action) => {
       return {
         ...state,
         [action.id]: action.user || false,
-      }
+      };
     default:
-      return state
+      return state;
   }
 }
 
@@ -64,8 +64,8 @@ export const lists = (
       return {
         ...state,
         [action.listType]: action.ids,
-      }
+      };
     default:
-      return state
+      return state;
   }
 }

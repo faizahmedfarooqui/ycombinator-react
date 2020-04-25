@@ -1,25 +1,25 @@
-import { startCase } from 'lodash'
-import PropTypes from 'prop-types'
-import React, { Fragment } from 'react'
-import { Redirect } from 'react-router'
-import { renderRoutes } from 'react-router-config'
-import { withRouter, NavLink } from 'react-router-dom'
-import { Transition, TransitionGroup } from 'react-transition-group'
-import Loadable from 'react-loadable'
+import { startCase } from 'lodash';
+import PropTypes from 'prop-types';
+import Loadable from 'react-loadable';
+import React, { Fragment } from 'react';
+import { Redirect } from 'react-router';
+import { renderRoutes } from 'react-router-config';
+import { withRouter, NavLink } from 'react-router-dom';
+import { Transition, TransitionGroup } from 'react-transition-group';
 
-import 'styles/app'
+import 'styles/app';
 
 const resolver = loader =>
   Loadable({
     loader,
     loading: () => null,
-  })
+  });
 
 const createListView = id =>
-  resolver(() => import('views/CreateListView').then(m => m.default(id)))
+  resolver(() => import('views/CreateListView').then(m => m.default(id)));
 
-const RedirectToTop = () => <Redirect to="/top" />
-RedirectToTop.preload = ({ context }) => (context.url = '/top')
+const RedirectToTop = () => <Redirect to="/top" />;
+RedirectToTop.preload = ({ context }) => (context.url = '/top');
 
 export const routes = [
   {

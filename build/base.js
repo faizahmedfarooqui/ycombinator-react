@@ -1,12 +1,12 @@
-import webpack from 'webpack'
-import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import webpack from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 
-import { NODE_ENV, __DEV__, hasType, resolve } from './config'
+import { NODE_ENV, __DEV__, hasType, resolve } from './config';
 
 const options = {
   sourceMap: __DEV__,
-}
+};
 
 const cssLoaders = manualInject => [
   manualInject
@@ -29,7 +29,7 @@ const cssLoaders = manualInject => [
     loader: 'sass-loader',
     options,
   },
-]
+];
 
 export const babelLoader = isServer => ({
   test: /\.js$/,
@@ -49,11 +49,10 @@ export const babelLoader = isServer => ({
             ],
           },
         ],
-      ],
-      // plugins: ['dynamic-import-node'],
+      ]
     }),
   },
-})
+});
 
 export default {
   mode: NODE_ENV,
@@ -96,4 +95,4 @@ export default {
     }),
     new FriendlyErrorsWebpackPlugin(),
   ],
-}
+};

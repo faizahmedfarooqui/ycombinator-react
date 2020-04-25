@@ -1,12 +1,12 @@
-import hoistStatics from 'hoist-non-react-statics'
-import PropTypes from 'prop-types'
-import React from 'react'
-import { withRouter } from 'react-router'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
+import hoistStatics from 'hoist-non-react-statics';
 
 export const withSsr = (styles, router = true, title) => {
   if (typeof router !== 'boolean') {
-    title = router
-    router = true
+    title = router;
+    router = true;
   }
 
   return Component => {
@@ -17,44 +17,44 @@ export const withSsr = (styles, router = true, title) => {
 
       static propTypes = {
         staticContext: PropTypes.object,
-      }
+      };
 
       constructor(props, context) {
-        super(props, context)
+        super(props, context);
         if (styles.__inject__) {
-          styles.__inject__(this.props.staticContext)
+          styles.__inject__(this.props.staticContext);
         }
 
-        this.setTitle()
+        this.setTitle();
       }
 
       setTitle() {
-        const t = typeof title === 'function' ? title.call(this, this) : title
+        const t = typeof title === 'function' ? title.call(this, this) : title;
 
         if (!t) {
-          return
+          return;
         }
 
         if (__SERVER__) {
-          this.props.staticContext.title = `YCombinator Hackernews | ${t}`
-          return
+          this.props.staticContext.title = `Hackernews | ${t}`;
+          return;
         }
 
         Promise.resolve(t).then(title => {
           if (title) {
-            document.title = `YCombinator Hackernews | ${title}`
+            document.title = `Hackernews | ${title}`;
           }
         })
       }
 
       render() {
-        return <Component {...this.props} />
+        return <Component {...this.props} />;
       }
     }
 
     return hoistStatics(
       router ? withRouter(SsrConmponent) : SsrConmponent,
       Component,
-    )
+    );
   }
 }

@@ -1,27 +1,27 @@
-import { startCase } from 'lodash'
-import p2r from 'path-to-regexp'
-import PropTypes from 'prop-types'
-import React from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import React from 'react';
+import p2r from 'path-to-regexp';
+import { startCase } from 'lodash';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import styles from './styles'
+import styles from './styles';
 
-import { watchList } from 'api'
+import { watchList } from 'api';
 import {
   activeItems,
   setLoading,
   setList,
   ensureActiveItems,
   fetchListData,
-} from 'store'
+} from 'store';
 
-import { withSsr } from 'utils'
-import Item from 'components/Item'
-import Spinner from 'components/Spinner'
+import { withSsr } from 'utils';
+import Item from 'components/Item';
+import Spinner from 'components/Spinner';
 
-import Chart from "react-google-charts";
+import LineChart from '../../components/Chart';
 
 @connect(
   (state, props) => ({
@@ -64,7 +64,6 @@ export default class ItemList extends React.Component {
 
   state = {
     displayedPage: this.page,
-    displayedItems: this.props.activeItems,
     itemTransition: 'item',
     transition: 'slide-right',
   }
@@ -105,8 +104,7 @@ export default class ItemList extends React.Component {
             () => {
               this.setState(
                 {
-                  displayedPage: to,
-                  displayedItems: this.props.activeItems,
+                  displayedPage: to
                 },
                 () => {
                   this.props.setLoading(false)
@@ -127,28 +125,24 @@ export default class ItemList extends React.Component {
     const { type } = this.props
 
     this.unwatchList = watchList(type, ids => {
-      this.props.setList(type, ids)
-      this.props.ensureActiveItems().then(() => {
-        this.setState({
-          displayedItems: this.props.activeItems,
-        })
-      })
-    })
+      this.props.setList(type, ids);
+      this.props.ensureActiveItems();
+    });
 
     this.unwatchPage = this.props.history.listen(location => {
       const {
         params: { page: prevPage },
         path,
-      } = this.props.match
+      } = this.props.match;
       if (
         this.isSameLocation(this.props.location, location) ||
         !p2r(path).exec(location.pathname)
       ) {
-        return
+        return;
       }
       setTimeout(() =>
         this.loadItems(this.props.match.params.page, prevPage || 1),
-      )
+      );
     })
   }
 
@@ -158,37 +152,16 @@ export default class ItemList extends React.Component {
   }
 
   render() {
-    
+    const { activeItems } = this.props;
+
     const { page, maxPage, hasMore } = this;
     const {
-      displayedItems,
       displayedPage,
       itemTransition,
       transition,
     } = this.state;
 
     const { loading, type } = this.props;
-
-    const data = [
-      ["Votes", "ID"],
-    ];
-
-    displayedItems.forEach(item => {      
-      data.push([
-        item.id + '', 
-        (typeof item.score === "string") ? 0 : item.score
-      ]);
-    });
-
-    const options = {
-      vAxis: {
-        title: "Votes"
-      },
-      hAxis: {
-        title: "ID"
-      },
-      series: {5: {type: "line"}}
-    };
 
     return (
       <div className="news-view">
@@ -220,22 +193,16 @@ export default class ItemList extends React.Component {
           <div className="news-list">
             {maxPage && !loading ? (
               <TransitionGroup component="ul">
-                {displayedItems.map(item => (
+                {activeItems.map(item => (
                   <CSSTransition
                     key={item.id}
                     classNames={itemTransition}
                     timeout={itemTransition ? 500 : 0}
-                  >
+                  >                  
                     <Item item={item} />
                   </CSSTransition>
                 ))}
-                <Chart
-                  chartType="LineChart"
-                  width="100%"
-                  height="400px"
-                  data={data}
-                  options={options}
-                />
+                <LineChart displayedItems={activeItems} />
               </TransitionGroup>
             ) : (
               <div className="loading">

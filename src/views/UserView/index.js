@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import styles from './styles'
+import styles from './styles';
 
-import { fetchUser } from 'store'
-import { withSsr, timeAgo } from 'utils'
+import { fetchUser } from 'store';
+import { withSsr, timeAgo } from 'utils';
 
-const USER_NOT_FOUND = 'User Not Found'
+const USER_NOT_FOUND = 'User Not Found';
 
 @connect(
   ({ users }) => ({ users }),
@@ -21,21 +21,21 @@ const USER_NOT_FOUND = 'User Not Found'
     match: {
       params: { id },
     },
-  } = self.props
-  const user = users[id]
+  } = self.props;
+  const user = users[id];
 
   if (user) {
-    return id
+    return id;
   }
 
   if (user === false) {
-    return USER_NOT_FOUND
+    return USER_NOT_FOUND;
   }
 
   if (!__SERVER__) {
     return self.props
       .fetchUser()
-      .then(() => (self.props.users[id] ? id : USER_NOT_FOUND))
+      .then(() => (self.props.users[id] ? id : USER_NOT_FOUND));
   }
 })
 export default class UserView extends React.Component {
@@ -46,12 +46,12 @@ export default class UserView extends React.Component {
   }
 
   get user() {
-    const { match, users } = this.props
-    return users[match.params.id]
+    const { match, users } = this.props;
+    return users[match.params.id];
   }
 
   static preload({ match, store }) {
-    return store.dispatch(fetchUser(match.params.id))
+    return store.dispatch(fetchUser(match.params.id));
   }
 
   render() {
@@ -79,11 +79,11 @@ export default class UserView extends React.Component {
             </ul>
             <p className="links">
               <a href={'https://news.ycombinator.com/submitted?id=' + user.id}>
-                submissions
+                Submissions
               </a>{' '}
-              |
+              | {' '}
               <a href={'https://news.ycombinator.com/threads?id=' + user.id}>
-                comments
+                Comments
               </a>
             </p>
           </>

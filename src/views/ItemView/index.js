@@ -1,14 +1,14 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import styles from './styles'
+import styles from './styles';
 
-import Spinner from 'components/Spinner'
-import Comment from 'components/Comment'
-import { fetchItems } from 'store'
-import { withSsr, host, timeAgo } from 'utils'
+import { fetchItems } from 'store';
+import Spinner from 'components/Spinner';
+import Comment from 'components/Comment';
+import { withSsr, host, timeAgo } from 'utils';
 
 @connect(
   ({ items }) => ({ items }),
@@ -37,30 +37,30 @@ export default class ItemView extends React.Component {
   }
 
   static preload({ match, store }) {
-    const { id } = match.params
-    return store.dispatch(fetchItems([id]))
+    const { id } = match.params;
+    return store.dispatch(fetchItems([id]));
   }
 
   get item() {
-    return this.props.items[this.props.match.params.id]
+    return this.props.items[this.props.match.params.id];
   }
 
   fetchItems() {
-    const { item } = this
+    const { item } = this;
 
     if (!item || !item.kids) {
-      return
+      return;
     }
 
     this.setState({
       loading: true,
-    })
+    });
 
     this.fetchComments(item).then(() =>
       this.setState({
         loading: false,
       }),
-    )
+    );
   }
 
   fetchComments(item) {
@@ -76,8 +76,8 @@ export default class ItemView extends React.Component {
   }
 
   render() {
-    const { loading } = this.state
-    const { item } = this
+    const { loading } = this.state;
+    const { item } = this;
 
     return item ? (
       <div className="item-view">

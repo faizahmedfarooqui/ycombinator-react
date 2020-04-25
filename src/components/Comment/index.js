@@ -1,18 +1,18 @@
-import PropTypes from 'prop-types'
-import React, { useState } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import styles from './styles'
+import styles from './styles';
 
-import { withSsr, timeAgo } from 'utils'
+import { withSsr, timeAgo } from 'utils';
 
-const pluralize = n => n + (n === 1 ? ' reply' : ' replies')
+const pluralize = n => n + (n === 1 ? ' reply' : ' replies');
 
 const Comment = ({ comments, id }) => {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(true);
 
-  const comment = comments[id]
+  const comment = comments[id];
 
   return comment ? (
     <li className="comment">
@@ -54,8 +54,8 @@ const Comment = ({ comments, id }) => {
 Comment.propTypes = {
   comments: PropTypes.object.isRequired,
   id: PropTypes.number.isRequired,
-}
+};
 
 export default connect(({ items }) => ({ comments: items }))(
   withSsr(styles)(Comment),
-)
+);

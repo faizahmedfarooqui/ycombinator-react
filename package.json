@@ -14,7 +14,7 @@
     "build": "rimraf dist && ./node_modules/.bin/cross-env DEBUG=ycombinator:* NODE_ENV=production run-p build:react:client build:react:server build:server build:template",
     "start": "./node_modules/.bin/cross-env DEBUG=ycombinator:* NODE_ENV=production node dist/server",
     "lint": "eslint . --ignore-path .gitignore --max-warnings=10",
-    "pm2": "yarn sync:pull && ./node_modules/.bin/cross-env PORT=8000 pm2 start --name=react-hn npm -- start",
+    "pm2": "./node_modules/.bin/cross-env PORT=8000 pm2 start --name=ycombinator-react npm -- start",
     "prune": "yarn install --production --ignore-optional --ignore-scripts --prefer-offline --force"
   },
   "dependencies": {
@@ -46,7 +46,8 @@
     "react-transition-group": "^4.2.2",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "serialize-javascript": "^1.7.0"
+    "serialize-javascript": "^1.7.0",
+    "universal-cookie": "^4.0.3"
   },
   "devDependencies": {
     "@1stg/eslint-config": "^0.20.0",

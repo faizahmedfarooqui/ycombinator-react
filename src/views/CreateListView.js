@@ -28,7 +28,7 @@ export default type => {
     }
 
     componentDidMount() {
-      this.props.fetchListData(this.props.match.url.replace(/\//g,''), undefined);
+      this.props.fetchListData(type, undefined);
     }
 
     static preload({ store, match }) {
