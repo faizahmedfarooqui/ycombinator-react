@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { 
   withSsr, host, timeAgo, hideItem, itemExist, upVote, isVoted
 } from 'utils';
+import { startCase } from 'lodash';
 
 import styles from './styles';
 
@@ -27,11 +28,11 @@ const show = (item, _voted) => (
     <span className="meta">
       {item.type !== 'job' ? (
         <span className="by">
-          by <Link to={'/user/' + item.by}>{item.by}</Link>{' '}
+          by <Link to={'/user/' + item.by}>{item.by}</Link> {' '} | {' '}
         </span>
       ) : null}
       <span className="time">{timeAgo(item.time)} ago</span>
-      | {' '}
+      {' '} | {' '}
       <span className="comments-link">
         <Link onClick={() => hideItem(item)}>Hide</Link>
       </span>
@@ -40,10 +41,10 @@ const show = (item, _voted) => (
           {' '}
           | <Link to={'/item/' + item.id}>{item.descendants} Comments</Link>
         </span>
-      ) : null}      
+      ) : null}
     </span>
     {item.type !== 'story' ? (
-      <span className="label">{' ' + item.type}</span>
+      <span className="meta">{' | ' + startCase(item.type)}</span>
     ) : null}
   </li>
 );
