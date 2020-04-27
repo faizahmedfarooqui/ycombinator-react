@@ -51,7 +51,7 @@ const clientConfig = merge.smart(base, {
 if (!__DEV__) {
   clientConfig.plugins.push(
     new SWPrecacheWebpackPlugin({
-      cacheId: 'react-hn',
+      cacheId: 'ycombinator-react',
       filename: 'service-worker.js',
       minify: true,
       dontCacheBustUrlsMatching: /./,
