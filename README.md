@@ -23,10 +23,10 @@ yarn start;
 git clone https://github.com/faizahmedfarooqui/ycombinator-react.git;
 
 # Create the Build 
-docker build -t <your-username>/<repository name> .
+docker build -t <your-username>/<repository-name> .
 
 # Run the Image
-docker run -p 49160:4000 -d <your-username>/node-web-app
+docker run -p 49160:4000 -d <your-username>/<repository-name>
 
 # Get the Container ID
 docker ps
