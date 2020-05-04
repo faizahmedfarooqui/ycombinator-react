@@ -1,5 +1,9 @@
 # HackerNews Clone
 
+## Demo
+
+https://faizahmed-ycombinator.herokuapp.com
+
 ## Local SetUp:
 
 ```sh
