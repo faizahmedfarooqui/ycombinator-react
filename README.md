@@ -1,4 +1,4 @@
-# HackerNews Clone
+![Image](https://github.com/faizahmedfarooqui/ycombinator-react/blob/master/public/Image.png)
 
 ## Demo
 
