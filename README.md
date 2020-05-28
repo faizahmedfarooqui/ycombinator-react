@@ -2,7 +2,7 @@
 
 ## Demo
 
-https://faizahmed-ycombinator.herokuapp.com
+https://hackernews-faizahmed.herokuapp.com/top
 
 ## Local SetUp:
 
