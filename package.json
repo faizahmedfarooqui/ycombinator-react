@@ -79,7 +79,7 @@
     "postcss-loader": "^3.0.0",
     "prettier": "^1.18.2",
     "prop-types": "^15.7.2",
-    "pug": "^2.0.4",
+    "pug": ">=3.0.1"
     "pug-plain-loader": "^1.0.0",
     "react-style-loader": "^2.3.0",
     "rimraf": "^2.7.1",
